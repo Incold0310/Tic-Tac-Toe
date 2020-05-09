@@ -1,12 +1,22 @@
 import React from 'react';
-import '../style.css';
+import {connect} from 'react-redux';
+import {setSquareValue} from '../Redux/actions/setSquareValue.js';
 
 function Square (props) {
-    return (
-      <button className={props.squareClass} onClick={props.clickONButton}>
-        {props.squareValue}
-      </button>
-    );
+  return (
+    <div className="cell d-flex align-items-center justify-content-center" onClick={(e)=>{
+        props.setSquareValue(props.location, e.currentTarget.innerHTML);
+    }}>
+      {props.squareValue}
+    </div>
+  );
 }
 
-export default Square;
+export default connect(
+  null,
+  dispatch => ({
+    setSquareValue(num, value) {
+      dispatch(setSquareValue(num, value));
+    }
+  })
+)(Square);

@@ -1,43 +1,20 @@
 import React from 'react';
 import Board from './Board.js';
-import '../style.css';
+import GameModeSelection from './GameModeSelection/GameModeSelection.js';
+import '../style.scss';
 import {connect} from 'react-redux';
+import {Route, Redirect} from 'react-router-dom';
 
 class App extends React.Component {
   render() {
-    this.props.checkWin();
-    let status = `Next player: ${this.props.isO ? 'X' : 'O'}`;
-    if (this.props.win == 'DRAW!') {
-      status = `${this.props.win}`;
-    }
-    else if (this.props.win) {
-      status = `Winner: ${this.props.win}`;
-    }
 
     return (
-      <div>
-        <div className="game">
-          <div className="game-board">
-            <Board squareValue={this.props.squareValue} squareClass="square" click={this.props.changeValue}/>
-          </div>
-          <div className="game-info">
-            <div className="status">{status}</div>
-            <ol>
-              {this.props.history.boards.map((board,i)=>{
-                return <li key={i} className="historyStep" onClick={()=>{this.props.returnToStep(i)}}><div>
-                    <h5>Ход: {this.props.history.stepValue[i]}</h5>
-                    <Board squareValue={board} squareClass="squareInHistory" click={()=>{return;}}/>
-                    </div>
-                    <br />
-                    </li>
-              })}
-            </ol>
-          </div>
+      <div className="d-flex flex-column flex-fill">
+        <div className="pl-0 container-fluid d-flex flex-column flex-fill align-items-center justify-content-center">
+          <Route path="/gamemode" component={GameModeSelection}/>
+          <Route path="/game" component={Board}/>
+          { this.props.game ? <Redirect to="/game" /> : <Redirect to="/gamemode/classic" /> }
         </div>
-        <div>
-          <br />
-          <button className="atFirst" onClick={this.props.atFirst}>At first</button>
-          </div>
       </div>
     );
   }
@@ -45,23 +22,7 @@ class App extends React.Component {
 
 export default connect(
   state => ({
-    isO: state.oIsNext,
-    win: state.winner,
-    history: state.history,
-    squareValue: state.squaresValue,
+    game: state.gameParameters.playersSymbols.length
   }),
-  dispatch => ({
-    returnToStep(step) {
-      dispatch({type:'RETURN_TO_LAST_STEP', step:step})
-    },
-    atFirst() {
-      dispatch({type:'AT_FIRST'})
-    },
-    checkWin () {
-      dispatch({type:'CHECK_WIN'});
-    },
-    changeValue (i) {
-      dispatch({type:'CLICK_ON_FIELD', index: i});
-    }
-  })
+  null
 )(App);

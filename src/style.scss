@@ -1,0 +1,111 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin:0;
+  padding:0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+html {
+  height: 100vh;
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-image: url('./image/background.png');
+}
+
+#gamemodeselection {
+  background: white;
+  border: 1px solid rgb(2, 77, 199);
+  border-radius: 5%;
+  padding: 2.5%;
+
+  img {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+  }
+
+  form .row:not(:first-of-type) {
+    margin-top: 10px;
+  }
+}
+
+#board {
+  max-width: 1000px;
+  max-height: 95vh;
+
+  .table-responsive {
+    overflow-x: auto !important;
+  }
+
+  table {
+    background: white;
+    margin: auto;
+    border-collapse: collapse;
+
+    tbody {
+      overflow-y: auto;
+      overflow-x: auto !important;
+    }
+
+    .findCell {
+      font-weight: bold;
+      border: 3px solid rgb(116, 21, 176);
+    }
+
+    td {
+      border: 1px solid black;
+      cursor: pointer;
+
+      .cell {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+}
+
+#leftMenu {
+  background: white;
+  .mb-3 {
+    font-size: 180%;
+    height: 10vh;
+  }
+
+  #moveInfo {
+    border-top: 1px solid black;
+    height: 35vh;
+
+    .moves {
+      overflow-y: auto;
+      max-height: 60%;
+      cursor: pointer;
+
+      .choosedMove {
+        background: rgba(0, 240, 255, 0.12);
+        color: rgb(14, 9, 37);
+      }
+    }
+  }
+
+  #returnToMove {
+    border-top: 1px solid black;
+    height: 49vh;
+  }
+
+}
+
+a:focus, a:active, button:focus, button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
