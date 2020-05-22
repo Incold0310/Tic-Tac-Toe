@@ -19,4 +19,4 @@ export default connect(
       dispatch(setSquareValue(num, value));
     }
   })
-)(Square);
+)(React.memo(Square));
