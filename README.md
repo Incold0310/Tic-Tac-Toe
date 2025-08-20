@@ -70,3 +70,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 123 some changes
 
 changes for feat/1
+
+changes for feat/2
